@@ -1,6 +1,6 @@
 #include "HAL_Signal.h"
 
-////////////////////////////////////////////////////////////////////////////////////////////////////
+////////////////////////////////////////////////////////////////////////////////
 HAL_StatusTypeDef SignalPosition_Update(SignalPositionTypeDef *sig, uint8_t data, double *pos)
 {
 	sig->SPos_Buff[sig->SPos_Counter] = data;
@@ -36,7 +36,7 @@ HAL_StatusTypeDef SignalPosition_Update(SignalPositionTypeDef *sig, uint8_t data
 	}
 	return HAL_BUSY;
 }
-////////////////////////////////////////////////////////////////////////////////////////////////////
+////////////////////////////////////////////////////////////////////////////////
 //table[0]  -> Azimuth
 //table[1]  -> Elevation
 //table[2]  -> Polar
@@ -50,7 +50,7 @@ HAL_StatusTypeDef SignalStringToInt(uint8_t *buff, uint8_t nbuff, double *table)
 	double inum = 0.0;//integer number
 	double fnum = 0.0;//fractional number
 	uint8_t isnegative = 0;
-	//----------------------------------------------------------------------------------------------------
+	
 	while(n < nbuff + 1)
 	{
 		switch(buff[n])
@@ -68,7 +68,7 @@ HAL_StatusTypeDef SignalStringToInt(uint8_t *buff, uint8_t nbuff, double *table)
 				return HAL_ERROR;
 		}
 		n++;
-		//----------------------------------------------------------------------------------------------------
+		
 		if(buff[n] == '-')
 		{
 			isnegative = 1;
@@ -79,7 +79,7 @@ HAL_StatusTypeDef SignalStringToInt(uint8_t *buff, uint8_t nbuff, double *table)
 			isnegative = 0;
 			n++;
 		}
-		//----------------------------------------------------------------------------------------------------
+		
 		while((buff[n] < 58) && (buff[n] > 47))//in ASCII table 57='9' and 48='0'
 		{
 			n++;
@@ -97,7 +97,7 @@ HAL_StatusTypeDef SignalStringToInt(uint8_t *buff, uint8_t nbuff, double *table)
 		}
 		order = 0;
 		temp = 1;
-		//----------------------------------------------------------------------------------------------------
+		
 		if(buff[n] == '.')
 		{
 			n++;
@@ -121,7 +121,7 @@ HAL_StatusTypeDef SignalStringToInt(uint8_t *buff, uint8_t nbuff, double *table)
 		order =0;
 		nfraction = 0;
 		temp = 1;
-		//----------------------------------------------------------------------------------------------------
+		
 		if(isnegative)
 		{
 			table[m] = (inum + fnum) * -1;
@@ -135,7 +135,7 @@ HAL_StatusTypeDef SignalStringToInt(uint8_t *buff, uint8_t nbuff, double *table)
 	}
 	return HAL_OK;
 }
-////////////////////////////////////////////////////////////////////////////////////////////////////
+////////////////////////////////////////////////////////////////////////////////
 HAL_StatusTypeDef SignalPower_Update(SignalPowerTypeDef *sig, uint8_t data, uint16_t *power, uint8_t *lock)
 {
 	sig->SPwr_Buff[sig->SPwr_Counter] = data;
@@ -144,6 +144,10 @@ HAL_StatusTypeDef SignalPower_Update(SignalPowerTypeDef *sig, uint8_t data, uint
 		if(data == 'N')
 		{
 			*lock = 0;
+			return HAL_BUSY;
+		}
+		else if(data == 'S')
+		{
 			return HAL_ERROR;
 		}
 		else if(data == 'M')
@@ -168,4 +172,4 @@ HAL_StatusTypeDef SignalPower_Update(SignalPowerTypeDef *sig, uint8_t data, uint
 	}
 	return HAL_BUSY;
 }
-////////////////////////////////////////////////////////////////////////////////////////////////////
+////////////////////////////////////////////////////////////////////////////////

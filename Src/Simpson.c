@@ -1,11 +1,18 @@
 #include "Simpson.h"
 
+////////////////////////////////////////////////////////////////////////////////
 void SimpsonIntegration_Init(SimpsontypeDef *simp)
 {
 	simp->Integral = 0.0;
 	simp->State = IsZero;
 }
-
+////////////////////////////////////////////////////////////////////////////////
+void SimpsonIntegration_Reset(SimpsontypeDef *simp)
+{
+	simp->Integral = 0.0;
+	simp->State = IsZero;
+}
+////////////////////////////////////////////////////////////////////////////////
 double SimpsonIntegration_Update(SimpsontypeDef *simp, double input, double delta_t)
 {
 	if(simp->State == IsOdd)
@@ -26,3 +33,4 @@ double SimpsonIntegration_Update(SimpsontypeDef *simp, double input, double delt
 	
 	return simp->Integral;
 }
+////////////////////////////////////////////////////////////////////////////////

@@ -1,5 +1,6 @@
 #include "HAL_MPU9250.h"
 
+////////////////////////////////////////////////////////////////////////////////
 MPU9250_Result MPU9250_Init(SPI_HandleTypeDef* SPIx , MPU9250TypeDef* datastruct, GPIO_TypeDef *port, uint16_t pin)
 {
 	uint8_t WHO_AM_I = (uint8_t)MPU9250_WHO_AM_I;
@@ -53,9 +54,7 @@ MPU9250_Result MPU9250_Init(SPI_HandleTypeDef* SPIx , MPU9250TypeDef* datastruct
 	/* Return OK */
 	return MPU9250_RESULT_OK;
 }
-
-//SPI Write Reg
-
+////////////////////////////////////////////////////////////////////////////////
 MPU9250_Result MPU9250_WriteData(SPI_HandleTypeDef* SPIx, uint8_t addr, uint8_t data, GPIO_TypeDef *port, uint16_t pin)
 {
 	uint8_t buffer[2] = {addr, data};
@@ -66,9 +65,7 @@ MPU9250_Result MPU9250_WriteData(SPI_HandleTypeDef* SPIx, uint8_t addr, uint8_t 
 	/* Return OK */
 	return MPU9250_RESULT_OK;
 }
-
-//SPI Read Reg
-
+////////////////////////////////////////////////////////////////////////////////
 MPU9250_Result MPU9250_ReadData(SPI_HandleTypeDef* SPIx, uint8_t* buffer, uint8_t addr, uint8_t num, GPIO_TypeDef *port, uint16_t pin)
 {
 	uint8_t reg = addr | 0x80;
@@ -80,3 +77,4 @@ MPU9250_Result MPU9250_ReadData(SPI_HandleTypeDef* SPIx, uint8_t* buffer, uint8_
 	/* Return OK */
 	return MPU9250_RESULT_OK;
 }
+////////////////////////////////////////////////////////////////////////////////

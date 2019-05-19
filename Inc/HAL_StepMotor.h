@@ -2,6 +2,7 @@
 #define __HAL_STEPMOTOR_H__
 
 #include "stm32f4xx_hal.h"
+#include "math.h"
 
 #define STEPMOTOR_DEFAULT_FREQUENCY  200
 
@@ -41,6 +42,8 @@ typedef struct
 	double I_COE;
 	double D_COE;
 	double Integral;
+	double Derivative;
+	double PrevError;
 }PID_TypeDef;
 
 void StepMotor_Init(MotorStatusTypeDef *motor, TIM_HandleTypeDef *tim, uint32_t channel,
@@ -53,6 +56,6 @@ void StepMotor_Move_CCW(MotorStatusTypeDef *motor, uint32_t speed);
 HAL_StatusTypeDef StepMotor_Goto_Position(MotorStatusTypeDef *motor, double pos, uint32_t speed);
 void PID_Init(PID_TypeDef *pid, double p, double i, double d);
 void PID_Reset(PID_TypeDef *pid);
-double PID_Compute(PID_TypeDef *pid, double current_pos, double desierd_pos, double derivative);
-double P2ID_Compute(PID_TypeDef *pid, double current_pos, double desierd_pos, double derivative);
+double PID_Compute(PID_TypeDef *pid, double current_pos, double desierd_pos);
+double P2ID_Compute(PID_TypeDef *pid, double current_pos, double desierd_pos);
 #endif /*__HAL_STEPMOTOR_H__*/
