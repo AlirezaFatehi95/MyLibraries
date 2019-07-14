@@ -1,4 +1,4 @@
-#include "Simpson.h"
+#include "Simpson_Integration.h"
 
 ////////////////////////////////////////////////////////////////////////////////
 void SimpsonIntegration_Init(SimpsontypeDef *simp)

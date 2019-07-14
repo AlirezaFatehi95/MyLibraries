@@ -2,7 +2,13 @@
 #define __SIMPSON_H__
 
 #include "stdint.h"
-#include "MyDefault.h"
+
+typedef enum
+{
+	IsZero = 0,
+	IsOdd = 1,
+	IsEven = 2
+}NumberState;
 
 typedef struct
 {

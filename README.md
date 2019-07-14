@@ -1,2 +1,2 @@
 # MyLibraries
-Contains some drivers, filters, useful operations and ... for my personal use :)
+Contains some drivers, filters and calculations used in my previous projects :)
